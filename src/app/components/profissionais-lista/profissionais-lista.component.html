@@ -1,0 +1,43 @@
+<div class="profissionais-container">
+  <h2>Profissionais Disponíveis</h2>
+
+  <div class="filtros">
+    <div class="filtro-grupo">
+      <label for="filtroNome">Nome:</label>
+      <input 
+        type="text" 
+        id="filtroNome" 
+        [(ngModel)]="filtroNome" 
+        (ngModelChange)="aplicarFiltros()"
+        placeholder="Buscar por nome">
+    </div>
+
+    <div class="filtro-grupo">
+      <label for="filtroEspecialidade">Especialidade:</label>
+      <input 
+        type="text" 
+        id="filtroEspecialidade" 
+        [(ngModel)]="filtroEspecialidade" 
+        (ngModelChange)="aplicarFiltros()"
+        placeholder="Buscar por especialidade">
+    </div>
+  </div>
+
+  <div class="profissionais-grid">
+    <div class="profissional-card" *ngFor="let profissional of profissionaisFiltrados">
+      <h3>{{ profissional.nome }}</h3>
+      <p class="especialidade">{{ profissional.especialidade }}</p>
+      <div class="disponibilidade">
+        <h4>Horários Disponíveis:</h4>
+        <ul>
+          <li *ngFor="let horario of profissional.disponibilidade">{{ horario }}</li>
+        </ul>
+      </div>
+      <button class="agendar-btn">Agendar</button>
+    </div>
+  </div>
+
+  <div class="sem-resultados" *ngIf="profissionaisFiltrados.length === 0">
+    <p>Nenhum profissional encontrado com os filtros selecionados.</p>
+  </div>
+</div> 

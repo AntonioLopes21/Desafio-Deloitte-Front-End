@@ -1,0 +1,110 @@
+.agendamento-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.especialidade {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.agendamento-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-grupo {
+  margin-bottom: 20px;
+}
+
+.form-grupo label {
+  display: block;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.form-grupo input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.horarios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.horarios-grid button {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.horarios-grid button:hover {
+  background: #f5f5f5;
+}
+
+.horarios-grid button.selecionado {
+  background: #1976d2;
+  color: white;
+  border-color: #1976d2;
+}
+
+.confirmar-btn {
+  width: 100%;
+  padding: 12px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin-top: 20px;
+}
+
+.confirmar-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.agendamento-sucesso {
+  text-align: center;
+  padding: 40px;
+  background: #e8f5e9;
+  border-radius: 8px;
+}
+
+.agendamento-sucesso h3 {
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+.voltar-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.carregando {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+} 

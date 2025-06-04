@@ -1,0 +1,65 @@
+<div class="agendamentos-container">
+  <h2>Meus Agendamentos</h2>
+
+  <div class="filtros">
+    <button 
+      [class.active]="filtro === 'todos'"
+      (click)="filtrarAgendamentos('todos')">
+      Todos
+    </button>
+    <button 
+      [class.active]="filtro === 'futuros'"
+      (click)="filtrarAgendamentos('futuros')">
+      Futuros
+    </button>
+    <button 
+      [class.active]="filtro === 'passados'"
+      (click)="filtrarAgendamentos('passados')">
+      Passados
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    Carregando agendamentos...
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error">
+    <div *ngIf="getAgendamentosFiltrados().length === 0" class="no-appointments">
+      Nenhum agendamento encontrado.
+    </div>
+
+    <div *ngIf="getAgendamentosFiltrados().length > 0" class="appointments-list">
+      <div *ngFor="let agendamento of getAgendamentosFiltrados()" class="appointment-card">
+        <div class="appointment-header">
+          <h3>Agendamento #{{ agendamento.id }}</h3>
+          <span class="status" [ngClass]="{
+            'agendado': agendamento.status === 'AGENDADO',
+            'concluido': agendamento.status === 'CONCLUIDO',
+            'cancelado': agendamento.status === 'CANCELADO_CLIENTE' || agendamento.status === 'CANCELADO_PROFISSIONAL'
+          }">
+            {{ agendamento.status === 'CANCELADO_CLIENTE' ? 'Cancelado pelo Cliente' :
+               agendamento.status === 'CANCELADO_PROFISSIONAL' ? 'Cancelado pelo Profissional' :
+               agendamento.status }}
+          </span>
+        </div>
+        
+        <div class="appointment-details">
+          <p><strong>Data:</strong> {{ agendamento.dataHoraInicio | date:'dd/MM/yyyy HH:mm' }}</p>
+          <p><strong>Duração:</strong> {{ agendamento.dataHoraFim | date:'HH:mm' }}</p>
+          <p><strong>Profissional:</strong> {{ agendamento.profissionalId }}</p>
+          <p><strong>Serviço:</strong> {{ agendamento.servicoId }}</p>
+        </div>
+
+        <div class="appointment-actions" *ngIf="agendamento.status === 'AGENDADO'">
+          <button (click)="cancelarAgendamento(agendamento.id)" class="cancel-button">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

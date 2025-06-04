@@ -1,0 +1,46 @@
+<div class="agendamento-container" *ngIf="profissional">
+  <h2>Agendar com {{ profissional.nome }}</h2>
+  <p class="especialidade">{{ profissional.especialidade }}</p>
+
+  <div class="agendamento-form" *ngIf="!agendamentoRealizado">
+    <div class="form-grupo">
+      <label for="data">Data:</label>
+      <input 
+        type="date" 
+        id="data" 
+        [(ngModel)]="dataSelecionada"
+        (ngModelChange)="atualizarHorariosDisponiveis()"
+        [min]="hoje">
+    </div>
+
+    <div class="form-grupo" *ngIf="dataSelecionada">
+      <label>Horários Disponíveis:</label>
+      <div class="horarios-grid">
+        <button 
+          *ngFor="let horario of horariosDisponiveis"
+          [class.selecionado]="horario === horarioSelecionado"
+          (click)="horarioSelecionado = horario">
+          {{ horario }}
+        </button>
+      </div>
+    </div>
+
+    <button 
+      class="confirmar-btn"
+      [disabled]="!dataSelecionada || !horarioSelecionado"
+      (click)="realizarAgendamento()">
+      Confirmar Agendamento
+    </button>
+  </div>
+
+  <div class="agendamento-sucesso" *ngIf="agendamentoRealizado">
+    <h3>Agendamento Realizado com Sucesso!</h3>
+    <p>Data: {{ dataSelecionada | date:'dd/MM/yyyy' }}</p>
+    <p>Horário: {{ horarioSelecionado }}</p>
+    <button class="voltar-btn" routerLink="/dashboard">Voltar ao Dashboard</button>
+  </div>
+</div>
+
+<div class="carregando" *ngIf="!profissional">
+  <p>Carregando informações...</p>
+</div> 

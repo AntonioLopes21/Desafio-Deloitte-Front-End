@@ -34,12 +34,14 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
-   cadastrar(usuario: Usuario): Observable<any> {
-     return this.http.post<any>(`${this.apiUrlUsuario}`, usuario);
-   }
+  cadastrar(usuario: Usuario): Observable<unknown> {
+    return this.http.post(`${this.apiUrlUsuario}/register`, usuario);
+  }
+
+   
 
   login(email: string, senha: string): Observable<LoginResponse> {
-      return this.http.post<LoginResponse>(`${this.apiUrlUsuario}/login}`, { email, senha });
+      return this.http.post<LoginResponse>(`${this.apiUrlUsuario}/login`, { email, senha });
 
   }
   

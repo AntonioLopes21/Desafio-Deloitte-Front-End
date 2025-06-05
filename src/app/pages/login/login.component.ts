@@ -56,7 +56,13 @@ export class LoginComponent {
             tipoUsuario: resposta.usuario.tipoUsuario
           }));
         
-        this.router.navigate(['/home']);
+        if (resposta.usuario.tipoUsuario === 'cliente') {
+            this.router.navigate(['/home-cliente']); } else if (resposta.usuario.tipoUsuario === 'profissional') {
+            this.router.navigate(['/home-profissional']);
+          } else {
+            this.erro = 'Tipo de usuário não reconhecido';
+            this.carregando = false;
+          }
       },
       error: (err) => {
         console.error('Erro no login:', err);

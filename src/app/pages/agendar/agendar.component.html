@@ -1,0 +1,32 @@
+<div class="agendamento">
+  <h2>Agendar com {{profissional?.nome}}</h2>
+  
+  <div class="selecao-data">
+    <label>Selecione uma data:</label>
+    <input type="date" [(ngModel)]="dataSelecionada" (change)="buscarDisponibilidade()">
+  </div>
+
+  <div *ngIf="carregando" class="carregando">
+    <p>Buscando horários disponíveis...</p>
+  </div>
+
+  <div *ngIf="disponibilidade.length > 0" class="horarios-disponiveis">
+    <h3>Horários disponíveis:</h3>
+    <div *ngFor="let slot of disponibilidade" class="slot-horario">
+      <button 
+        [class.selecionado]="horarioSelecionado === slot.hora"
+        (click)="horarioSelecionado = slot.hora">
+        {{slot.hora}}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="disponibilidade.length === 0 && dataSelecionada && !carregando">
+    <p>Nenhum horário disponível para esta data.</p>
+  </div>
+
+  <div *ngIf="horarioSelecionado" class="confirmacao">
+    <p>Horário selecionado: {{horarioSelecionado}}</p>
+    <button (click)="confirmarAgendamento()">Confirmar Agendamento</button>
+  </div>
+</div>

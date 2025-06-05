@@ -1,0 +1,26 @@
+<div class="dashboard">
+  <h2>Meus Próximos Agendamentos</h2>
+  
+  <div *ngIf="carregando; else conteudo">
+    <p>Carregando agendamentos...</p>
+  </div>
+
+  <ng-template #conteudo>
+    <div *ngIf="agendamentos.length > 0; else semAgendamentos">
+      <div *ngFor="let agendamento of agendamentos" class="card-agendamento">
+        <h3>{{agendamento.servico}}</h3>
+        <p>Profissional: {{agendamento.profissional}}</p>
+        <p>Data: {{agendamento.data | date:'dd/MM/yyyy'}}</p>
+        <p>Horário: {{agendamento.hora}}</p>
+      </div>
+    </div>
+    
+    <ng-template #semAgendamentos>
+      <p>Nenhum agendamento marcado.</p>
+    </ng-template>
+  </ng-template>
+
+  <button routerLink="/explorar-servicos" class="btn-novo-agendamento">
+    Agendar Novo Serviço
+  </button>
+</div>

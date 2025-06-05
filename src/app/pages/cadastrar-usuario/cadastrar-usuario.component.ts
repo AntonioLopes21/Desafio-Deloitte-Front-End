@@ -14,7 +14,6 @@ export class CadastrarUsuarioComponent {
   nome: string = '';
   email: string = '';
   senha: string = '';
-  confirmarSenha: string = '';
   tipoUsuario: 'CLIENTE' | 'PROFISSIONAL' = 'CLIENTE';
   erro: string = '';
   carregando: boolean = false;
@@ -22,11 +21,7 @@ export class CadastrarUsuarioComponent {
   constructor(private usuarioService: UsuarioService) {}
 
   cadastrar() {
-    if (this.senha !== this.confirmarSenha) {
-      this.erro = 'As senhas não coincidem!';
-      return;
-    }
-
+    
     this.carregando = true;
     this.erro = '';
 

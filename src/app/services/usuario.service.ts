@@ -6,29 +6,40 @@ interface Usuario {
     nome: string;
     email: string;
     senha: string;
-    confirmarSenha?: string;
     tipoUsuario: 'CLIENTE' | 'PROFISSIONAL';
   }
+
+  export interface LoginResponse {
+  usuario: {
+    id: number;
+    nome: string;
+    email: string;
+    tipoUsuario: string;
+  };
+}
+
+export interface ErrorResponse {
+  message: string;
+  statusCode?: number;
+  error?: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UsuarioService {
-  private apiUrl = 'http://localhost:8080/usuarios';
+  private apiUrl = 'http://localhost:8080/auth';
 
   constructor(private http: HttpClient) { }
 
-  cadastrar(usuario: Omit<Usuario, 'confirmarSenha'>): Observable<unknown> {
-    return this.http.post(this.apiUrl, usuario);
+  cadastrar(usuario: Usuario): Observable<unknown> {
+    return this.http.post(`${this.apiUrl}/register`, usuario);
   }
 
-  cadastrarComValidacao(usuario: Usuario): Observable<unknown> {
-    if (usuario.senha !== usuario.confirmarSenha) {
-    return throwError(() => new Error('As senhas não coincidem'));
+  login(email: string, senha: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { email, senha });
   }
   
-  const { confirmarSenha, ...dadosParaEnviar } = usuario;
-  return this.http.post(this.apiUrl, dadosParaEnviar);
-  }
+  
 }

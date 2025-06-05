@@ -1,49 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
-    
-    <div id="mensagem-sucesso" style="display: none; color: green;">
-        Cadastro realizado com sucesso! Faça login para continuar.
+
+<h2>Login</h2>
+
+<div *ngIf="cadastroSucesso" class="mensagem-sucesso">
+    Cadastro realizado com sucesso! Faça login para continuar.
+</div>
+
+<form (ngSubmit)="login()" #loginForm=""ngForm>
+    <div>
+        <label>Email:</label>
+        <input type="email" [(ngModel)]="email" name="email" required>
     </div>
     
-    <form id="form-login">
-        <div>
-            <label>Email:</label><br>
-            <input type="email" id="email" name="email" required>
-        </div>
-        
-        <div>
-            <label>Senha:</label><br>
-            <input type="password" id="senha" name="senha" required>
-        </div>
-        
-        <button type="submit">Entrar</button>
-        
-        <div id="erro" style="color: red; display: none;"></div>
-    </form>
+    <div>
+        <label>Senha:</label>
+        <input type="password" [(ngModel)]="senha" name="senha" required>
+    </div>
     
-    <p>
-        Não tem conta? <a routerLink="/cadastrar" href="/cadastrar">Cadastre-se</a>
-    </p>
-    
-    <script>
-      
-        document.getElementById('form-login').addEventListener('submit', function(e) {
-            e.preventDefault();
-            console.log('Tentativa de login com:', {
-                email: document.getElementById('email').value,
-                senha: document.getElementById('senha').value
-            });
-        });
-        
-        
-        if (window.location.search.includes('sucesso')) {
-            document.getElementById('mensagem-sucesso').style.display = 'block';
-        }
-    </script>
-</body>
-</html>
+    <button type="submit">Entrar</button>
+</form>
+
+<p>
+    Não tem conta? <a routerLink="/cadastrar">Cadastre-se</a> 
+</p>

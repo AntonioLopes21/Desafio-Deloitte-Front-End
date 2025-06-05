@@ -38,9 +38,10 @@ export class UsuarioService {
      return this.http.post<any>(`${this.apiUrlUsuario}`, usuario);
    }
 
-  // login(email: string, senha: string): Observable<LoginResponse> {
-  //   return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { email, senha });
-  // }
+  login(email: string, senha: string): Observable<LoginResponse> {
+      return this.http.post<LoginResponse>(`${this.apiUrl}/login}`, { email, senha });
+
+  }
   
   
 }
